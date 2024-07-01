@@ -1,20 +1,21 @@
 import React from 'react';
 import CardComponent from './CardComponent';
-import { CardPrices } from '../types/CardPriceType';
-import { Card } from '../types/CardType';
-
+import { CardDetail } from '../types/CardDetail';
 
 interface CardListProps {
-  cards: Card[];
-  crPrices: CardPrices[];
+  cards: CardDetail[] | undefined;
 }
 
-const CardListComponent: React.FC<CardListProps> = ({ cards, crPrices }) => {
+const CardListComponent: React.FC<CardListProps> = ({ cards }) => {
   return (
     <div className="card-list">
-        {cards.map((card) => (
+      {cards ? (
+        cards.map((card) => (
             <CardComponent card={card}/>
-        ))}
+        ))
+      ) : (
+        <p>No results</p>
+      )}
     </div>
   );
 };

@@ -1,39 +1,20 @@
-import React, { useState } from 'react';
-import CardSearch from './components/CardSearch';
+import React, { useEffect, useState } from 'react';
+import Header from './components/Header';
 import CardListComponent from './components/CardListComponent';
 import './App.css';
-
-interface Card {
-  id: string;
-  name: string;
-  set_name: string;
-  image_uris?: {
-    small: string;
-  };
-}
-
-interface CardPrice {
-  name: string;
-  price: number;
-  available: number;
-}
+import { CardDetail } from './types/CardDetail';
 
 const App: React.FC = () => {
-  const [cards, setCards] = useState<Card[]>([]);
-  const [prices, setPrices] = useState<CardPrice[]>([]);
+  const [cards, setCards] = useState<CardDetail[] | undefined>([]);
 
-  const handleSearchResults = (results: Card[]): void => {
+  const handleSearchResults = (results: CardDetail[] | undefined): void => {
     setCards(results);
-  };
-
-  const handleSearchPriceResults = (results: CardPrice[]): void => {
-    setPrices(results);
   };
 
   return (
     <div className="App">
-      <CardSearch onSearch={handleSearchResults} onSearchPrices={handleSearchPriceResults}/>
-      <CardListComponent cards={cards} crPrices={prices}/>
+      <Header onSearch={handleSearchResults}/>
+      <CardListComponent cards={cards}/>
     </div>
   );
 };
