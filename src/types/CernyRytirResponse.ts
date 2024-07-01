@@ -25,8 +25,8 @@ export interface CernyRytirPriceResponse {
     type: string;
     foil: boolean;
     rarity: string;
-    quantity: string;
-    price: string;
+    quantity: number;
+    price: number;
     condition: string;
     alternative: string;
     image_url: string;

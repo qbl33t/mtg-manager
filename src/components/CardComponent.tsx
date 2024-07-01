@@ -7,6 +7,7 @@ import {
   remove
 } from '../features/trade-list/tradeListSlice';
 import { CardDetail } from '../types/CardDetail';
+import { CardTradeDetail } from '../types/CardTradeDetail';
 
 interface CardComponentProps {
     card: CardDetail;
@@ -26,9 +27,13 @@ const CardComponent: React.FC<CardComponentProps> = ({ card }) => {
         // Implement the logic for adding to the trading list
         console.log(`Added ${quantity} ${card.name} - ${card.cr_detail.id} to the trading list.`);
 
-        dispatch(add(card));
+        const cardTrade: CardTradeDetail = {
+            ...card,
+            quantity: quantity
+        }
 
-        // onAdd({quantity, card});
+        // raise event
+        dispatch(add(cardTrade));
     };
 
     return (

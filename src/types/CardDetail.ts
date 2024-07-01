@@ -15,12 +15,13 @@ export interface CardDetail {
     image_url: string;
     cr_detail: {
         id: string;
-        quantity: string;
-        price: string;
+        quantity: number;
+        price: number;
         original_name: string;
     }
 }
 
+// this should be defined in some Class via static function
 export function fromCernyRytirPriceResponse(crResponse: CernyRytirPriceResponse): CardDetail {
     return {
         name: crResponse.name,
@@ -34,8 +35,8 @@ export function fromCernyRytirPriceResponse(crResponse: CernyRytirPriceResponse)
         image_url: crResponse.image_url,
         cr_detail: {
             id: crResponse.id,
-            quantity: crResponse.quantity,
-            price: crResponse.price,
+            quantity: Number(crResponse.quantity),
+            price: Number(crResponse.price),
             original_name: crResponse.original_name
         }
     };

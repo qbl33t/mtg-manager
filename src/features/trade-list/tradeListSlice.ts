@@ -1,15 +1,15 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { CernyRytirPriceResponse } from '../../types/CernyRytirResponse'
 import type { RootState } from '../../app/store'
+import { CardDetail } from '../../types/CardDetail';
 
 // Define a type for the slice state
 interface TradingListState {
-  value: Set<CernyRytirPriceResponse>;
+  value: Map<CardDetail, number>;
 }
 
 // Define the initial state using that type
 const initialState: TradingListState = {
-  value: new Set<CernyRytirPriceResponse>(),
+  value: new Map<CardDetail, number>(),
 }
 
 export const tradeListSlice = createSlice({
@@ -17,11 +17,10 @@ export const tradeListSlice = createSlice({
   initialState,
   reducers: {
     add: (state, action) => {
-      // check if card is already in list
-      if (!state.value.has(action.payload)) {
-        // add card to list
-        state.value.add(action.payload);
-      }
+      // get current state -> add wanted value or set wanted value
+      const currentValue = state.value.get(action.payload);
+      const wantedQuantity = action.payload.quantity;
+      state.value.set(action.payload, currentValue !== undefined ? currentValue + wantedQuantity : wantedQuantity);
     },
     remove: (state, action) => {
       state.value.delete(action.payload);

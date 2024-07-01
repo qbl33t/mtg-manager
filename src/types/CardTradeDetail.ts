@@ -3,6 +3,6 @@ import { CardDetail } from "./CardDetail";
 //
 //
 //
-export interface TradeCardDetail extends CardDetail {
+export interface CardTradeDetail extends CardDetail {
     quantity: number;
 }
